@@ -1,18 +1,10 @@
+import type { ITransaction } from "../../interfaces"
 import type { RootState } from "../../app/store"
 import { createAppSlice } from "../../app/createAppSlice"
 import { createTransaction } from "./transactionAPI"
 import moment from "moment"
-import uuidv4 from "../../helpers/uuidv4"
+import uuidv4 from "@helpers/uuidv4"
 
-export interface ITransaction {
-  [key: string]: string | number
-  id: string
-  date: string
-  amount: number
-  type: "buy" | "sell"
-  price: number
-  comission: number
-}
 export interface TransactionSliceState {
   formValue: ITransaction
   transactions: ITransaction[]

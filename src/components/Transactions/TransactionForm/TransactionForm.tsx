@@ -14,10 +14,10 @@ import {
   selectInitialFormValue,
   selectInitialStatus,
 } from "../transactionSlice"
-import { useAppDispatch, useAppSelector } from "../../../app/hooks"
+import { useAppDispatch, useAppSelector } from "@app/hooks"
 
 import { DatePicker } from "@mui/x-date-pickers"
-import type { ITransaction } from "../transactionSlice"
+import type { ITransaction } from "@interfaces/index"
 import moment from "moment"
 import { useState } from "react"
 
