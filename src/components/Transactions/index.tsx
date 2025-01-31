@@ -14,17 +14,22 @@ import {
   selectInitialStatus,
   selectTransactions,
 } from "./transactionSlice"
+import {
+  getAllStocksInformation,
+  selectStockInformations,
+} from "./Transaction/StockInformation/stockInformationSlice"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 
 import type { ITransaction } from "@interfaces/index"
 import { TransactionForm } from "./TransactionForm/TransactionForm"
 import moment from "moment"
+import { useEffect } from "react"
 
-// lets fake the actual price of the ticker
-const fakeCurrentPrice = 40.48
-const calculatePercentageGains = (transaction: ITransaction) => {
-  const sellPrice =
-    fakeCurrentPrice * transaction.amount - transaction.comission
+const calculatePercentageGains = (
+  transaction: ITransaction,
+  currentPrice: number,
+) => {
+  const sellPrice = currentPrice * transaction.amount - transaction.comission
   const buyPrice =
     transaction.price * transaction.amount + transaction.comission
 
@@ -32,8 +37,8 @@ const calculatePercentageGains = (transaction: ITransaction) => {
 
   return Number(gains.toFixed(3)) * 100
 }
-const calculateGains = (transaction: ITransaction) => {
-  const gains = (fakeCurrentPrice - transaction.price) * transaction.amount
+const calculateGains = (transaction: ITransaction, currentPrice: number) => {
+  const gains = (currentPrice - transaction.price) * transaction.amount
 
   return Number(gains.toFixed(2)) - transaction.comission
 }
@@ -41,13 +46,20 @@ const calculateGains = (transaction: ITransaction) => {
 const Transactions = () => {
   const transactions = useAppSelector(selectTransactions)
   const status = useAppSelector(selectInitialStatus)
+  const stockInformations = useAppSelector(selectStockInformations)
   const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(getAllStocksInformation())
+  }, [dispatch])
+
+  console.log(stockInformations, "stockInformations")
 
   return (
     <Box sx={{ p: 2 }}>
       <TransactionForm />
       <TableContainer component={Paper}>
-        <Table>
+        <Table sx={{ minWidth: 650 }} size="small">
           <TableHead>
             <TableRow>
               <TableCell align="right">ACTION</TableCell>
@@ -88,10 +100,16 @@ const Transactions = () => {
                     transaction.amount * transaction.price}
                 </TableCell>
                 <TableCell align="right">
-                  {calculatePercentageGains(transaction)}
+                  {calculatePercentageGains(
+                    transaction,
+                    stockInformations[transaction.ticker].currentPrice,
+                  )}
                 </TableCell>
                 <TableCell align="right">
-                  {calculateGains(transaction)}
+                  {calculateGains(
+                    transaction,
+                    stockInformations[transaction.ticker].currentPrice,
+                  )}
                 </TableCell>
               </TableRow>
             ))}
