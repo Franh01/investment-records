@@ -1,7 +1,11 @@
+import {
+  createTransactionService,
+  deleteTransactionService,
+} from "./transactionAPI"
+
 import type { ITransaction } from "../../interfaces"
 import type { RootState } from "../../app/store"
 import { createAppSlice } from "../../app/createAppSlice"
-import { createTransaction } from "./transactionAPI"
 import moment from "moment"
 import uuidv4 from "@helpers/uuidv4"
 
@@ -37,11 +41,11 @@ export const transactionSlice = createAppSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: create => ({
-    createForm: create.asyncThunk(
+    createTransaction: create.asyncThunk(
       async (formData: ITransaction, thunkAPI) => {
         const { transaction } = thunkAPI.getState() as RootState
 
-        const response = await createTransaction(
+        const response = await createTransactionService(
           formData,
           transaction.transactions,
         )
@@ -67,6 +71,30 @@ export const transactionSlice = createAppSlice({
         },
       },
     ),
+    deleteTransaction: create.asyncThunk(
+      async (formData: ITransaction, thunkAPI) => {
+        const { transaction } = thunkAPI.getState() as RootState
+
+        const response = await deleteTransactionService(
+          formData.id,
+          transaction.transactions,
+        )
+        // The value we return becomes the `fulfilled` action payload
+        return response
+      },
+      {
+        pending: state => {
+          state.status = "loading"
+        },
+        fulfilled: (state, action) => {
+          state.status = "idle"
+          state.transactions = action.payload
+        },
+        rejected: state => {
+          state.status = "failed"
+        },
+      },
+    ),
   }),
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
@@ -78,7 +106,7 @@ export const transactionSlice = createAppSlice({
 })
 
 // Action creators are generated for each case reducer function.
-export const { createForm } = transactionSlice.actions
+export const { createTransaction, deleteTransaction } = transactionSlice.actions
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
 export const {

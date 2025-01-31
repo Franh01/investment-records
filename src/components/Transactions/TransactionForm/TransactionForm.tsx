@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material"
 import {
-  createForm,
+  createTransaction,
   selectInitialFormValue,
   selectInitialStatus,
 } from "../transactionSlice"
@@ -55,7 +55,7 @@ export const TransactionForm = () => {
       price: Number(formValues.price),
       comission: Number(formValues.comission),
     }
-    dispatch(createForm(formData))
+    dispatch(createTransaction(formData))
     setFormValues(initialValue)
   }
 

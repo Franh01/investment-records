@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Paper,
   Table,
   TableBody,
@@ -8,16 +9,20 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material"
+import {
+  deleteTransaction,
+  selectInitialStatus,
+  selectTransactions,
+} from "./transactionSlice"
+import { useAppDispatch, useAppSelector } from "../../app/hooks"
 
 import type { ITransaction } from "@interfaces/index"
 import { TransactionForm } from "./TransactionForm/TransactionForm"
 import moment from "moment"
-import { selectTransactions } from "./transactionSlice"
-import { useAppSelector } from "../../app/hooks"
 
 // lets fake the actual price of the ticker
 const fakeCurrentPrice = 40.48
-const obtainPercentageGains = (transaction: ITransaction) => {
+const calculatePercentageGains = (transaction: ITransaction) => {
   const sellPrice =
     fakeCurrentPrice * transaction.amount - transaction.comission
   const buyPrice =
@@ -27,7 +32,7 @@ const obtainPercentageGains = (transaction: ITransaction) => {
 
   return Number(gains.toFixed(3)) * 100
 }
-const obtainGains = (transaction: ITransaction) => {
+const calculateGains = (transaction: ITransaction) => {
   const gains = (fakeCurrentPrice - transaction.price) * transaction.amount
 
   return Number(gains.toFixed(2)) - transaction.comission
@@ -35,6 +40,9 @@ const obtainGains = (transaction: ITransaction) => {
 
 const Transactions = () => {
   const transactions = useAppSelector(selectTransactions)
+  const status = useAppSelector(selectInitialStatus)
+  const dispatch = useAppDispatch()
+
   return (
     <Box sx={{ p: 2 }}>
       <TransactionForm />
@@ -42,6 +50,7 @@ const Transactions = () => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell align="right">ACTION</TableCell>
               <TableCell align="right">Date</TableCell>
               <TableCell align="right">Type</TableCell>
               <TableCell align="right">Ticker</TableCell>
@@ -57,6 +66,16 @@ const Transactions = () => {
             {transactions.map((transaction: ITransaction) => (
               <TableRow key={transaction.id}>
                 <TableCell align="right">
+                  <Button
+                    disabled={status === "loading"}
+                    variant="contained"
+                    color="error"
+                    onClick={() => dispatch(deleteTransaction(transaction))}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+                <TableCell align="right">
                   {moment(transaction.date).format("L")}
                 </TableCell>
                 <TableCell align="right">{transaction.type}</TableCell>
@@ -69,9 +88,11 @@ const Transactions = () => {
                     transaction.amount * transaction.price}
                 </TableCell>
                 <TableCell align="right">
-                  {obtainPercentageGains(transaction)}
+                  {calculatePercentageGains(transaction)}
                 </TableCell>
-                <TableCell align="right">{obtainGains(transaction)}</TableCell>
+                <TableCell align="right">
+                  {calculateGains(transaction)}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
