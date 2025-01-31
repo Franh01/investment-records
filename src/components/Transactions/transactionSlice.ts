@@ -24,6 +24,7 @@ const initialState: TransactionSliceState = {
     type: "buy",
     price: 0,
     comission: 0,
+    ticker: "",
   },
   transactions: initialTransactions,
   status: "idle",

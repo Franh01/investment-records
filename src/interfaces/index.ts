@@ -6,4 +6,5 @@ export interface ITransaction {
   type: "buy" | "sell"
   price: number
   comission: number
+  ticker: string
 }

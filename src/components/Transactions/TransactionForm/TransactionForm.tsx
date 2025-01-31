@@ -30,6 +30,10 @@ export const TransactionForm = () => {
 
   const formInputs = [
     {
+      name: "ticker",
+      type: "text",
+    },
+    {
       name: "amount",
       type: "number",
     },

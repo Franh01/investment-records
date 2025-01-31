@@ -1,6 +1,6 @@
 import "./App.css"
 
-import Transactions from "./components"
+import Transactions from "./components/Transactions"
 
 const App = () => {
   return (
