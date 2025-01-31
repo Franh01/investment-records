@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@mui/material"
 
-import type { ITransaction } from "../transactionSlice"
+import type { ITransaction } from "@interfaces/index"
 
 const Transaction = (transaction: ITransaction) => {
   return (

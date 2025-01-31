@@ -1,4 +1,4 @@
-import type { ITransaction } from "./transactionSlice"
+import type { ITransaction } from "@interfaces/index"
 
 export const createTransaction = (
   formData: ITransaction,
