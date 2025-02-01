@@ -36,9 +36,11 @@ export const stockInformationSlice = createAppSlice({
           transaction => transaction.ticker,
         )
 
-        const response = await getStockInformationBySymbols(
-          symbolsByTransactions,
-        )
+        const settedSymbols = new Set(symbolsByTransactions)
+
+        const uniqueSymbols = Array.from(settedSymbols)
+
+        const response = await getStockInformationBySymbols(uniqueSymbols)
         // The value we return becomes the `fulfilled` action payload
         return response
       },
