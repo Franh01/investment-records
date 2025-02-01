@@ -81,7 +81,7 @@ export const TransactionForm = ({
       }}
     >
       <Paper sx={{ p: 2 }}>
-        <Typography variant="h3">Transaction Form</Typography>
+        <Typography variant="h5">Transaction Form</Typography>
         {status === "loading" && <LinearProgress />}
         <Box
           component="form"

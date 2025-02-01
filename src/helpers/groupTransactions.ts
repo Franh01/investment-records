@@ -16,6 +16,7 @@ export const groupTransactions = (
   transactions.forEach(tx => {
     const { ticker, amount, price, comission, type, date } = tx
     const signedAmount = type === "sell" ? -amount : amount
+    const signedCost = type === "sell" ? -price * amount : price * amount
 
     if (!grouped[ticker]) {
       grouped[ticker] = {
@@ -27,9 +28,8 @@ export const groupTransactions = (
     }
 
     grouped[ticker].totalAmount += signedAmount
-    grouped[ticker].totalCost += signedAmount * price + comission
+    grouped[ticker].totalCost += signedCost
     grouped[ticker].totalComission += comission
-    grouped[ticker].latestDate = date
   })
 
   return Object.keys(grouped).map(ticker => {

@@ -68,7 +68,11 @@ const Transactions = () => {
 
       <TransactionForm isCreating={isCreating} setIsCreating={setIsCreating} />
 
-      <DefaultTable transactions={groupedTransactions} status={status} />
+      <DefaultTable
+        transactions={groupedTransactions}
+        status={status}
+        tableCellsToAvoid={["type", "action"]}
+      />
     </Box>
   )
 }
