@@ -1,5 +1,7 @@
 import {
+  Box,
   Button,
+  LinearProgress,
   Paper,
   Table,
   TableBody,
@@ -8,10 +10,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material"
-import {
-  getAllStocksInformation,
-  selectStockInformations,
-} from "@components/Transactions/Transaction/StockInformation/stockInformationSlice"
 import { useAppDispatch, useAppSelector } from "@app/hooks"
 
 import type { ITransaction } from "@interfaces/index"
@@ -19,7 +17,7 @@ import { calculateGains } from "@helpers/calculateGains"
 import { calculatePercentageGains } from "@helpers/calculatePercentageGains"
 import { deleteTransaction } from "@components/Transactions/transactionSlice"
 import moment from "moment"
-import { useEffect } from "react"
+import { selectStockInformations } from "@components/Transactions/Transaction/StockInformation/stockInformationSlice"
 
 const tableCells = [
   "Action",
@@ -43,10 +41,6 @@ const DefaultTable = ({ transactions, status }: IDefaultTableProps) => {
   const dispatch = useAppDispatch()
   const stockInformations = useAppSelector(selectStockInformations)
 
-  useEffect(() => {
-    dispatch(getAllStocksInformation())
-  }, [dispatch])
-
   if (transactions.length === 0) {
     return (
       <div>
@@ -57,9 +51,9 @@ const DefaultTable = ({ transactions, status }: IDefaultTableProps) => {
 
   if (status === "loading") {
     return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
+      <Box>
+        <LinearProgress sx={{ width: "100%" }} />
+      </Box>
     )
   }
 
