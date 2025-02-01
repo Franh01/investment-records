@@ -14,6 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from "@app/hooks"
 
 import type { ITransaction } from "@interfaces/index"
+import { NavLink } from "react-router-dom"
 import { calculateGains } from "@helpers/calculateGains"
 import { calculatePercentageGains } from "@helpers/calculatePercentageGains"
 import { deleteTransaction } from "@components/Transactions/transactionSlice"
@@ -148,7 +149,11 @@ const DefaultTable = ({
                     {capitalize(transaction.type)}
                   </TableCell>
                 )}
-                <TableCell align="center">{transaction.ticker}</TableCell>
+                <TableCell align="center">
+                  <NavLink to={`/stocks/${transaction.ticker}`}>
+                    {transaction.ticker}
+                  </NavLink>
+                </TableCell>
                 <TableCell align="center">{transaction.amount}</TableCell>
                 <TableCell align="center">
                   {transaction.price.toFixed(2)}
@@ -164,7 +169,6 @@ const DefaultTable = ({
                   {/* Precio actual */}
                   {stockInformations[transaction.ticker]?.currentPrice || 0}
                 </TableCell>
-
                 <TableCell
                   align="center"
                   sx={{

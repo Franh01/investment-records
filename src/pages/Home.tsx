@@ -1,13 +1,6 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  IconButton,
-  Typography,
-} from "@mui/material"
+import { Box, Button } from "@mui/material"
 import {
   getAllStocksInformation,
-  selectStatus,
   selectStockInformations,
 } from "@components/StockInformation/stockInformationSlice"
 import {
@@ -19,9 +12,8 @@ import { useAppDispatch, useAppSelector } from "@app/hooks"
 import { useEffect, useState } from "react"
 
 import DefaultTable from "@components/DefaultTable/DefaultTable"
-import { RefreshOutlined } from "@mui/icons-material"
+import RefreshStockInformationButton from "@components/RefreshStockInformationButton"
 import Statistics from "@components/Transactions/Statistics/Statistics"
-import { StockButtons } from "@components/StockButtons/StockButtons"
 import { TransactionForm } from "@components/Transactions/TransactionForm/TransactionForm"
 
 const Home = () => {
@@ -30,7 +22,7 @@ const Home = () => {
   const groupedTransactions = useAppSelector(selectGroupedTransactions)
 
   const status = useAppSelector(selectInitialStatus)
-  const allStockInformationStatus = useAppSelector(selectStatus)
+
   const stockInformations = useAppSelector(selectStockInformations)
   const dispatch = useAppDispatch()
 
@@ -45,40 +37,11 @@ const Home = () => {
 
   return (
     <Box sx={{ p: 2 }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            alignItems: "center",
-          }}
-        >
-          <Typography>Current stocks</Typography>
-          <IconButton
-            onClick={() => dispatch(getAllStocksInformation())}
-            disabled={allStockInformationStatus === "loading"}
-          >
-            {allStockInformationStatus === "loading" ? (
-              <CircularProgress size={20} />
-            ) : (
-              <RefreshOutlined />
-            )}
-          </IconButton>
-        </Box>
-        <StockButtons />
-        <Button onClick={() => setIsCreating(true)}>New transaction</Button>
+      <Statistics />
 
-        <Statistics />
-      </Box>
-
+      <Button onClick={() => setIsCreating(true)}>New transaction</Button>
       <TransactionForm isCreating={isCreating} setIsCreating={setIsCreating} />
-
+      <RefreshStockInformationButton />
       <DefaultTable
         transactions={groupedTransactions}
         status={status}

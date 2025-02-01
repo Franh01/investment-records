@@ -40,6 +40,7 @@ export const groupTransactions = (
       amount: data.totalAmount,
       type: data.totalAmount >= 0 ? "buy" : "sell",
       price: data.totalAmount !== 0 ? data.totalCost / data.totalAmount : 0,
+      totalPrice: data.totalCost,
       comission: data.totalComission,
       ticker,
     }
