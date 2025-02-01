@@ -20,6 +20,7 @@ import { useEffect, useState } from "react"
 
 import DefaultTable from "@components/DefaultTable/DefaultTable"
 import { RefreshOutlined } from "@mui/icons-material"
+import Statistics from "@components/Transactions/Statistics/Statistics"
 import { StockButtons } from "@components/StockButtons/StockButtons"
 import { TransactionForm } from "@components/Transactions/TransactionForm/TransactionForm"
 
@@ -47,24 +48,34 @@ const Home = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        <Typography>Current stocks</Typography>
-        <IconButton
-          onClick={() => dispatch(getAllStocksInformation())}
-          disabled={allStockInformationStatus === "loading"}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "center",
+          }}
         >
-          {allStockInformationStatus === "loading" ? (
-            <CircularProgress size={20} />
-          ) : (
-            <RefreshOutlined />
-          )}
-        </IconButton>
+          <Typography>Current stocks</Typography>
+          <IconButton
+            onClick={() => dispatch(getAllStocksInformation())}
+            disabled={allStockInformationStatus === "loading"}
+          >
+            {allStockInformationStatus === "loading" ? (
+              <CircularProgress size={20} />
+            ) : (
+              <RefreshOutlined />
+            )}
+          </IconButton>
+        </Box>
+        <StockButtons />
+        <Button onClick={() => setIsCreating(true)}>New transaction</Button>
+
+        <Statistics />
       </Box>
-      <StockButtons />
-      <Button onClick={() => setIsCreating(true)}>New transaction</Button>
 
       <TransactionForm isCreating={isCreating} setIsCreating={setIsCreating} />
 

@@ -6,6 +6,7 @@ import {
 import type { ITransaction } from "../../interfaces"
 import type { RootState } from "../../app/store"
 import { createAppSlice } from "../../app/createAppSlice"
+import { getTransactionsStatistics } from "@helpers/getTransactionsStatistics"
 import { groupTransactions } from "@helpers/groupTransactions"
 import moment from "moment"
 import uuidv4 from "@helpers/uuidv4"
@@ -109,6 +110,20 @@ export const transactionSlice = createAppSlice({
     },
   },
 })
+
+export const selectTransactionsStatistics = (state: RootState) => {
+  if (!state.transaction.transactions)
+    return {
+      totalInvestment: 0,
+      unrealizedGains: 0,
+      unrealizedGainsPercentage: 0,
+    }
+
+  return getTransactionsStatistics(
+    state.transaction.transactions,
+    state.stockInformation.stocksInformation || {},
+  )
+}
 
 // Action creators are generated for each case reducer function.
 export const { createTransaction, deleteTransaction } = transactionSlice.actions

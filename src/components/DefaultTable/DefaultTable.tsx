@@ -169,19 +169,19 @@ const DefaultTable = ({
                   align="center"
                   sx={{
                     color: Number(gainsInPercentage) > 0 ? "green" : "red",
+                    fontWeight: "400",
                   }}
                 >
-                  {/* Rendimiento % */}
-                  {gainsInPercentage}
+                  {gainsInPercentage}%
                 </TableCell>
                 <TableCell
                   align="center"
                   sx={{
                     color: Number(gainsInDollars) > 0 ? "green" : "red",
+                    fontWeight: "400",
                   }}
                 >
-                  {/* Rendimiento $ */}
-                  {gainsInDollars}
+                  $ {gainsInDollars}
                 </TableCell>
                 {tableCellsToAvoid?.includes("action") ? null : (
                   <TableCell align="center">

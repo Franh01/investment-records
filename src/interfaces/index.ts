@@ -40,3 +40,9 @@ export interface IStockInformationResponse {
   status: number
   statusText: string
 }
+
+export interface ITransactionStatistics {
+  totalInvestment: number
+  unrealizedGains: number
+  unrealizedGainsPercentage: number
+}
