@@ -4,7 +4,6 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
 import App from "./App"
 import { LocalizationProvider } from "@mui/x-date-pickers"
 import { Provider } from "react-redux"
-import React from "react"
 import { createRoot } from "react-dom/client"
 import { store } from "./app/store"
 
@@ -14,13 +13,11 @@ if (container) {
   const root = createRoot(container)
 
   root.render(
-    <React.StrictMode>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </LocalizationProvider>
-    </React.StrictMode>,
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </LocalizationProvider>,
   )
 } else {
   throw new Error(
