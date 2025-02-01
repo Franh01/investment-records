@@ -58,12 +58,13 @@ const DefaultTable = ({ transactions, status }: IDefaultTableProps) => {
   }
 
   return (
+    //TODO: Make this table sortable
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small">
         <TableHead>
           <TableRow>
             {tableCells.map(cell => (
-              <TableCell key={cell} align="right">
+              <TableCell key={cell} align="center" sortDirection="desc">
                 {cell}
               </TableCell>
             ))}
@@ -88,7 +89,9 @@ const DefaultTable = ({ transactions, status }: IDefaultTableProps) => {
               <TableCell align="right">{transaction.type}</TableCell>
               <TableCell align="right">{transaction.ticker}</TableCell>
               <TableCell align="right">{transaction.amount}</TableCell>
-              <TableCell align="right">{transaction.price}</TableCell>
+              <TableCell align="right">
+                {transaction.price.toFixed(2)}
+              </TableCell>
               <TableCell align="right">{transaction.comission}</TableCell>
               <TableCell align="right">
                 {transaction.comission + transaction.amount * transaction.price}
