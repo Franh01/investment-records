@@ -94,7 +94,10 @@ const DefaultTable = ({ transactions, status }: IDefaultTableProps) => {
               </TableCell>
               <TableCell align="right">{transaction.comission}</TableCell>
               <TableCell align="right">
-                {transaction.comission + transaction.amount * transaction.price}
+                {(
+                  transaction.comission +
+                  transaction.amount * transaction.price
+                ).toFixed(2)}
               </TableCell>
               <TableCell align="right">
                 {stockInformations[transaction.ticker]?.currentPrice || 0}
