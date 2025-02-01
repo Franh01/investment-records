@@ -6,6 +6,7 @@ import {
 import type { ITransaction } from "../../interfaces"
 import type { RootState } from "../../app/store"
 import { createAppSlice } from "../../app/createAppSlice"
+import { groupTransactions } from "@helpers/groupTransactions"
 import moment from "moment"
 import uuidv4 from "@helpers/uuidv4"
 
@@ -102,6 +103,10 @@ export const transactionSlice = createAppSlice({
     selectInitialFormValue: transaction => transaction.formValue,
     selectInitialStatus: transaction => transaction.status,
     selectTransactions: transaction => transaction.transactions,
+    selectGroupedTransactions: transaction => {
+      if (!transaction.transactions) return []
+      return groupTransactions(transaction.transactions)
+    },
   },
 })
 
@@ -113,6 +118,7 @@ export const {
   selectInitialFormValue,
   selectInitialStatus,
   selectTransactions,
+  selectGroupedTransactions,
 } = transactionSlice.selectors
 
 // We can also write thunks by hand, which may contain both sync and async logic.

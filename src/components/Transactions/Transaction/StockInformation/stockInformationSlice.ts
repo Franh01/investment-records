@@ -31,7 +31,6 @@ export const stockInformationSlice = createAppSlice({
     getAllStocksInformation: create.asyncThunk(
       async (_, thunkAPI) => {
         const { transaction } = thunkAPI.getState() as RootState
-        console.log(" second")
 
         const symbolsByTransactions = transaction.transactions.map(
           transaction => transaction.ticker,
