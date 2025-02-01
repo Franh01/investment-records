@@ -18,7 +18,7 @@ import { calculateGains } from "@helpers/calculateGains"
 import { calculatePercentageGains } from "@helpers/calculatePercentageGains"
 import { deleteTransaction } from "@components/Transactions/transactionSlice"
 import moment from "moment"
-import { selectStockInformations } from "@components/Transactions/Transaction/StockInformation/stockInformationSlice"
+import { selectStockInformations } from "@components/StockInformation/stockInformationSlice"
 
 const tableCells = [
   {

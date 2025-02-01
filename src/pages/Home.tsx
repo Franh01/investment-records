@@ -9,21 +9,21 @@ import {
   getAllStocksInformation,
   selectStatus,
   selectStockInformations,
-} from "./Transaction/StockInformation/stockInformationSlice"
+} from "@components/StockInformation/stockInformationSlice"
 import {
   selectGroupedTransactions,
   selectInitialStatus,
   selectTransactions,
-} from "./transactionSlice"
-import { useAppDispatch, useAppSelector } from "../../app/hooks"
+} from "@components/Transactions/transactionSlice"
+import { useAppDispatch, useAppSelector } from "@app/hooks"
 import { useEffect, useState } from "react"
 
 import DefaultTable from "@components/DefaultTable/DefaultTable"
 import { RefreshOutlined } from "@mui/icons-material"
-import { StockButtons } from "./StockButtons/StockButtons"
-import { TransactionForm } from "./TransactionForm/TransactionForm"
+import { StockButtons } from "@components/StockButtons/StockButtons"
+import { TransactionForm } from "@components/Transactions/TransactionForm/TransactionForm"
 
-const Transactions = () => {
+const Home = () => {
   const [isCreating, setIsCreating] = useState(false)
   const transactions = useAppSelector(selectTransactions)
   const groupedTransactions = useAppSelector(selectGroupedTransactions)
@@ -77,4 +77,4 @@ const Transactions = () => {
   )
 }
 
-export default Transactions
+export default Home

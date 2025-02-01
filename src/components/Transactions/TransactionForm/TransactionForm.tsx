@@ -144,7 +144,7 @@ export const TransactionForm = ({
             type="submit"
             disabled={status === "loading"}
           >
-            Add transaction
+            Nueva transacción
           </Button>
         </Box>
       </Paper>

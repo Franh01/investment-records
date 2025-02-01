@@ -2,7 +2,7 @@ import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { stockInformationSlice } from "../components/Transactions/Transaction/StockInformation/stockInformationSlice"
+import { stockInformationSlice } from "../components/StockInformation/stockInformationSlice"
 import { transactionSlice } from "../components/Transactions/transactionSlice"
 
 // `combineSlices` automatically combines the reducers using

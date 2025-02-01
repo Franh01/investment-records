@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material"
 
 import { NavLink } from "react-router"
-import { selectStockInformations } from "../Transaction/StockInformation/stockInformationSlice"
+import { selectStockInformations } from "@components/StockInformation/stockInformationSlice"
 import { useAppSelector } from "@app/hooks"
 
 export const StockButtons = () => {
