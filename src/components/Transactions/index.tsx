@@ -1,4 +1,4 @@
-import { Box, Button, Modal, Typography } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import { selectInitialStatus, selectTransactions } from "./transactionSlice"
 
 import DefaultTable from "@components/DefaultTable/DefaultTable"
