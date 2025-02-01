@@ -3,12 +3,14 @@ import {
   Button,
   FormControl,
   InputLabel,
+  LinearProgress,
   MenuItem,
   Modal,
   Paper,
   Select,
   TextField,
   Typography,
+  capitalize,
 } from "@mui/material"
 import {
   createTransaction,
@@ -69,10 +71,18 @@ export const TransactionForm = ({
   }
 
   return (
-    <Modal open={isCreating} onClose={() => setIsCreating(false)}>
-      <Paper>
-        <Typography variant="h2">Transaction Form</Typography>
-        <Typography>{status}</Typography>
+    <Modal
+      open={isCreating}
+      onClose={() => setIsCreating(false)}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Paper sx={{ p: 2 }}>
+        <Typography variant="h3">Transaction Form</Typography>
+        {status === "loading" && <LinearProgress />}
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -118,7 +128,7 @@ export const TransactionForm = ({
           {formInputs.map((input: { name: string; type: string }) => (
             <TextField
               key={input.name}
-              label={input.name}
+              label={capitalize(input.name)}
               type={input.type}
               value={formValues[input.name]}
               onChange={e =>
