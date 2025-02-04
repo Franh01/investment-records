@@ -25,6 +25,8 @@ export const getTransactionsStatistics = (
     )
   })
 
+  totalInvestment = totalInvestment + unrealizedGains
+
   let unrealizedGainsPercentage = (unrealizedGains / totalInvestment) * 100
 
   return { totalInvestment, unrealizedGains, unrealizedGainsPercentage }
