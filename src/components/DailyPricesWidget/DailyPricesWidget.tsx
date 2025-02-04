@@ -9,7 +9,6 @@ interface IDailyPricesWidgetProps {
 }
 
 const DailyPricesWidget = ({ data }: IDailyPricesWidgetProps) => {
-  console.log(data, "data")
   return (
     <Box
       sx={{
@@ -18,6 +17,7 @@ const DailyPricesWidget = ({ data }: IDailyPricesWidgetProps) => {
         alignItems: "center",
         mr: 6,
         color: "var(--dark-contrast)",
+        minWidth: "130px",
       }}
     >
       <Typography mr={"10px"} fontSize={"14px"}>
