@@ -35,26 +35,43 @@ const Layout = () => {
     const scrollInterval = 35 // Ajusta este valor para cambiar la suavidad del scroll
 
     const scroll = () => {
+      // Verifica que el contenedor tenga contenido con scroll, que no se haya activado el stop por hover,
+      // y que no estemos en la pausa al final
       if (
         scrollContainer.scrollWidth > scrollContainer.clientWidth &&
         !stopScrolling &&
         !pauseAtEndRef.current
       ) {
         setScrollAmount(prevScrollAmount => {
-          let newScrollAmount = prevScrollAmount + scrollStep // Ajusta la posición del scroll
-          if (
-            newScrollAmount >=
+          const maxScroll =
             scrollContainer.scrollWidth - scrollContainer.clientWidth
-          ) {
-            // Resetea la posición del scroll cuando llega al final
-            newScrollAmount = 0
-          }
-          scrollContainer.scrollTo({
-            left: newScrollAmount,
-            behavior: "smooth",
-          })
+          const newScrollAmount = prevScrollAmount + scrollStep
 
-          return newScrollAmount
+          if (newScrollAmount >= maxScroll) {
+            // Activamos la pausa para evitar seguir incrementando el scroll
+            pauseAtEndRef.current = true
+
+            // Después de 1 segundo, reseteamos el scroll a 0 y desactivamos la pausa
+            setTimeout(() => {
+              scrollContainer.scrollTo({
+                left: 0,
+                behavior: "instant",
+              })
+              setTimeout(() => {
+                setScrollAmount(0)
+                pauseAtEndRef.current = false
+              }, 1000)
+            }, 1000)
+
+            // Retornamos el valor previo para no modificar el estado hasta que se reinicie
+            return prevScrollAmount
+          } else {
+            scrollContainer.scrollTo({
+              left: newScrollAmount,
+              behavior: "instant",
+            })
+            return newScrollAmount
+          }
         })
       }
     }
