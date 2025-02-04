@@ -24,7 +24,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@services/*": ["src/services/*"],
-      "@translations/*": ["src/translations/*"]
+      "@translations/*": ["src/translations/*"],
+      "@pages/*": ["src/pages/*"]
     }
   },
   "include": ["vite.config.ts", "src/**/*"],
