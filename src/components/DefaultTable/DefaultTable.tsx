@@ -144,7 +144,12 @@ const DefaultTable = ({
                 {tableCellsToAvoid?.includes("type") ? null : (
                   <TableCell
                     align="center"
-                    sx={{ color: transaction.type === "buy" ? "green" : "red" }}
+                    sx={{
+                      color:
+                        transaction.type === "buy"
+                          ? "var(--higher-color)"
+                          : "var(--lower-color)",
+                    }}
                   >
                     {capitalize(transaction.type)}
                   </TableCell>
@@ -172,7 +177,10 @@ const DefaultTable = ({
                 <TableCell
                   align="center"
                   sx={{
-                    color: Number(gainsInPercentage) > 0 ? "green" : "red",
+                    color:
+                      Number(gainsInPercentage) > 0
+                        ? "var(--higher-color)"
+                        : "var(--lower-color)",
                     fontWeight: "400",
                   }}
                 >
@@ -181,7 +189,10 @@ const DefaultTable = ({
                 <TableCell
                   align="center"
                   sx={{
-                    color: Number(gainsInDollars) > 0 ? "green" : "red",
+                    color:
+                      Number(gainsInDollars) > 0
+                        ? "var(--higher-color)"
+                        : "var(--lower-color)",
                     fontWeight: "400",
                   }}
                 >

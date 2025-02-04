@@ -35,14 +35,22 @@ const Statistics = () => {
         Unrealized Gains:
         <Typography
           variant="h5"
-          sx={{ color: statistics.unrealizedGains < 0 ? "red" : "green" }}
+          sx={{
+            color:
+              statistics.unrealizedGains < 0
+                ? "var(--lower-color)"
+                : "var(--higher-color)",
+          }}
         >
           $ {statistics.unrealizedGains.toFixed(2)}
         </Typography>
         <Typography
           variant="h5"
           sx={{
-            color: statistics.unrealizedGainsPercentage < 0 ? "red" : "green",
+            color:
+              statistics.unrealizedGainsPercentage < 0
+                ? "var(--lower-color)"
+                : "var(--higher-color)",
           }}
         >
           {statistics.unrealizedGainsPercentage.toFixed(2)}%
