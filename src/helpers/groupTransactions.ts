@@ -32,17 +32,25 @@ export const groupTransactions = (
     grouped[ticker].totalComission += comission
   })
 
-  return Object.keys(grouped).map(ticker => {
-    const data = grouped[ticker]
-    return {
-      id: ticker,
-      date: data.latestDate,
-      amount: data.totalAmount,
-      type: data.totalAmount >= 0 ? "buy" : "sell",
-      price: data.totalAmount !== 0 ? data.totalCost / data.totalAmount : 0,
-      totalPrice: data.totalCost,
-      comission: data.totalComission,
-      ticker,
-    }
+  const groupedTransactions: ITransaction[] = Object.keys(grouped).map(
+    ticker => {
+      const data = grouped[ticker]
+      return {
+        id: ticker,
+        date: data.latestDate,
+        amount: data.totalAmount,
+        type: data.totalAmount >= 0 ? "buy" : "sell",
+        price: data.totalAmount !== 0 ? data.totalCost / data.totalAmount : 0,
+        totalPrice: data.totalCost,
+        comission: data.totalComission,
+        ticker,
+      }
+    },
+  )
+
+  groupedTransactions.sort((a, b) => {
+    return b.price * b.amount - a.price * a.amount
   })
+
+  return groupedTransactions.filter(tx => tx.amount > 0)
 }

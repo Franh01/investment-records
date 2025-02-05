@@ -9,10 +9,6 @@ export default function SimpleBarChart() {
   const [isViewingPercentage, setIsViewingPercentage] = useState(false)
   const groupedTransactions = useAppSelector(selectGroupedTransactions)
 
-  groupedTransactions.sort((a, b) => {
-    return b.price * b.amount - a.price * a.amount
-  })
-
   const xLabels: string[] = groupedTransactions.map(t => t.ticker)
   const totalPortfolioValue = groupedTransactions.reduce(
     (acc, t) => acc + Number(t.price * t.amount),
