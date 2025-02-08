@@ -1,4 +1,3 @@
-import { Box, Button } from "@mui/material"
 import {
   getAllStocksInformation,
   selectStockInformations,
@@ -9,15 +8,13 @@ import {
   selectTransactions,
 } from "@components/Transactions/transactionSlice"
 import { useAppDispatch, useAppSelector } from "@app/hooks"
-import { useEffect, useState } from "react"
 
+import { Box } from "@mui/material"
 import DefaultTable from "@components/DefaultTable/DefaultTable"
-import RefreshStockInformationButton from "@components/RefreshStockInformationButton"
 import Statistics from "@components/Transactions/Statistics/Statistics"
-import { TransactionForm } from "@components/Transactions/TransactionForm/TransactionForm"
+import { useEffect } from "react"
 
 const Home = () => {
-  const [isCreating, setIsCreating] = useState(false)
   const transactions = useAppSelector(selectTransactions)
   const groupedTransactions = useAppSelector(selectGroupedTransactions)
 
@@ -36,12 +33,8 @@ const Home = () => {
   }, [transactions, dispatch, stockInformations])
 
   return (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, display: "flex", flexDirection: "column", gap: 3 }}>
       <Statistics />
-
-      <Button onClick={() => setIsCreating(true)}>New transaction</Button>
-      <TransactionForm isCreating={isCreating} setIsCreating={setIsCreating} />
-      <RefreshStockInformationButton />
       <DefaultTable
         transactions={groupedTransactions}
         status={status}
