@@ -1,7 +1,7 @@
 import { Box, Typography, useMediaQuery } from "@mui/material"
 import {
-  selectStatus,
   selectStockInformations,
+  selectStockInformationsStatus,
 } from "@components/StockInformation/stockInformationSlice"
 import { useEffect, useRef, useState } from "react"
 
@@ -10,7 +10,9 @@ import { Outlet } from "react-router-dom"
 import { useAppSelector } from "@app/hooks"
 
 const Layout = () => {
-  const allStockInformationStatus = useAppSelector(selectStatus)
+  const allStockInformationStatus = useAppSelector(
+    selectStockInformationsStatus,
+  )
   const allStockInformation = useAppSelector(selectStockInformations)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [stopScrolling, setStopScrolling] = useState<boolean>(false)

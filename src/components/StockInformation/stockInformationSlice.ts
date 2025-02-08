@@ -62,7 +62,7 @@ export const stockInformationSlice = createAppSlice({
   // You can define your selectors here. These selectors receive the slice
   // state as their first argument.
   selectors: {
-    selectStatus: stockInformation => stockInformation.status,
+    selectStockInformationsStatus: stockInformation => stockInformation.status,
     selectStockInformations: stockInformation =>
       stockInformation.stocksInformation,
   },
@@ -72,7 +72,7 @@ export const stockInformationSlice = createAppSlice({
 export const { getAllStocksInformation } = stockInformationSlice.actions
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectStatus, selectStockInformations } =
+export const { selectStockInformationsStatus, selectStockInformations } =
   stockInformationSlice.selectors
 
 // We can also write thunks by hand, which may contain both sync and async logic.
