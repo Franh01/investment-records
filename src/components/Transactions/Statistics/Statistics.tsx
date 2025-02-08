@@ -1,61 +1,21 @@
-import { Box, Typography } from "@mui/material"
-
-import type { ITransactionStatistics } from "@interfaces/index"
+import { Box } from "@mui/material"
 import SimpleBarChart from "./Charts/Bars"
-import { selectTransactionsStatistics } from "../transactionSlice"
-import { useAppSelector } from "@app/hooks"
+import Summary from "./Summary/Summary"
 
 const Statistics = () => {
-  const statistics: ITransactionStatistics = useAppSelector(
-    selectTransactionsStatistics,
-  )
-
   return (
     <Box
-      mb={5}
       sx={{
         display: "flex",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         alignItems: "flex-start",
+        border: "2px solid #114B5F10",
+        borderRadius: "5px",
+        height: "170px",
       }}
     >
-      <SimpleBarChart />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-        }}
-      >
-        Total:
-        <Typography variant="h5">
-          $ {statistics.totalInvestment.toFixed(2)}
-        </Typography>
-        Unrealized Gains:
-        <Typography
-          variant="h5"
-          sx={{
-            color:
-              statistics.unrealizedGains < 0
-                ? "var(--lower-color)"
-                : "var(--higher-color)",
-          }}
-        >
-          $ {statistics.unrealizedGains.toFixed(2)}
-        </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            color:
-              statistics.unrealizedGainsPercentage < 0
-                ? "var(--lower-color)"
-                : "var(--higher-color)",
-          }}
-        >
-          {statistics.unrealizedGainsPercentage.toFixed(2)}%
-        </Typography>
-      </Box>
+      <Summary />
+      <SimpleBarChart width={500} height={170} />
     </Box>
   )
 }
