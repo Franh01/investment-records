@@ -9,8 +9,6 @@ import {
   Paper,
   Select,
   TextField,
-  Typography,
-  capitalize,
 } from "@mui/material"
 import {
   createTransaction,
@@ -40,20 +38,24 @@ export const TransactionForm = ({
 
   const formInputs = [
     {
-      name: "ticker",
+      name: "symbol",
       type: "text",
+      label: "Símbolo",
     },
     {
       name: "amount",
       type: "number",
+      label: "Cantidad",
     },
     {
       name: "price",
       type: "number",
+      label: "Precio",
     },
     {
       name: "comission",
       type: "number",
+      label: "Comisión",
     },
   ]
 
@@ -80,8 +82,7 @@ export const TransactionForm = ({
         alignItems: "center",
       }}
     >
-      <Paper sx={{ p: 2 }}>
-        <Typography variant="h5">Transaction Form</Typography>
+      <Paper>
         {status === "loading" && <LinearProgress />}
         <Box
           component="form"
@@ -95,7 +96,7 @@ export const TransactionForm = ({
         >
           <DatePicker
             disableFuture
-            label="Select date"
+            label="Fecha"
             value={moment(formValues.date)}
             onChange={newValue => {
               setFormValues({
@@ -107,12 +108,12 @@ export const TransactionForm = ({
             }}
           />
           <FormControl>
-            <InputLabel id="type-selector">Type</InputLabel>
+            <InputLabel id="type-selector">Tipo</InputLabel>
             <Select
               labelId="type-selector"
               id="type-selector"
               value={formValues.type}
-              label="Type"
+              label="Tipo"
               onChange={e =>
                 setFormValues({
                   ...formValues,
@@ -120,31 +121,33 @@ export const TransactionForm = ({
                 })
               }
             >
-              <MenuItem value={"buy"}>Buy</MenuItem>
-              <MenuItem value={"sell"}>Sell</MenuItem>
+              <MenuItem value={"buy"}>Compra</MenuItem>
+              <MenuItem value={"sell"}>Venta</MenuItem>
             </Select>
           </FormControl>
 
-          {formInputs.map((input: { name: string; type: string }) => (
-            <TextField
-              key={input.name}
-              label={capitalize(input.name)}
-              type={input.type}
-              value={formValues[input.name]}
-              onChange={e =>
-                setFormValues({
-                  ...formValues,
-                  [input.name]: e.target.value,
-                })
-              }
-            />
-          ))}
+          {formInputs.map(
+            (input: { name: string; type: string; label: string }) => (
+              <TextField
+                key={input.name}
+                label={input.label}
+                type={input.type}
+                value={formValues[input.name]}
+                onChange={e =>
+                  setFormValues({
+                    ...formValues,
+                    [input.name]: e.target.value,
+                  })
+                }
+              />
+            ),
+          )}
           <Button
             variant="contained"
             type="submit"
             disabled={status === "loading"}
           >
-            Nueva transacción
+            Añadir operación
           </Button>
         </Box>
       </Paper>
