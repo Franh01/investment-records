@@ -5,7 +5,15 @@ import { selectGroupedTransactions } from "@components/Transactions/transactionS
 import { useAppSelector } from "@app/hooks"
 import { useState } from "react"
 
-export default function SimpleBarChart() {
+interface ISimpleBarChartProps {
+  readonly width?: number
+  readonly height?: number
+}
+
+export default function SimpleBarChart({
+  width = 500,
+  height = 300,
+}: ISimpleBarChartProps) {
   const [isViewingPercentage, setIsViewingPercentage] = useState(false)
   const groupedTransactions = useAppSelector(selectGroupedTransactions)
 
@@ -24,21 +32,26 @@ export default function SimpleBarChart() {
     { data: totalPricePercentage, label: "Porcentaje (%)", id: "tpPId" },
   ]
 
+  //TODO: Move this colors to variables in theme
   const colors1 = ["#3e95cd"]
-  const colors2 = ["#3cba9f"]
+  const colors2 = ["#1a936f"]
+
+  let x = 100
+  let y = 40
 
   return (
-    <Box>
-      Precio
+    <Box sx={{ position: "relative" }}>
       <Switch
+        sx={{ position: "absolute", top: "6px", right: "38px", zIndex: 1 }}
         onChange={() => setIsViewingPercentage(!isViewingPercentage)}
         value={isViewingPercentage}
       />
-      Porcentaje
       <BarChart
+        viewBox={{ x: 0, y: 0, width: 400, height: height }}
+        margin={{ top: y, right: x, bottom: y, left: x }}
         colors={isViewingPercentage ? colors2 : colors1}
-        width={500}
-        height={300}
+        width={width}
+        height={height}
         series={isViewingPercentage ? pricePercentage : normalPrice}
         xAxis={[{ data: xLabels, scaleType: "band" }]}
       />
