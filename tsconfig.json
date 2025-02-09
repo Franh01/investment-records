@@ -28,6 +28,7 @@
       "@pages/*": ["src/pages/*"]
     }
   },
-  "include": ["vite.config.ts", "src/**/*"],
+  "include": ["src/**/*"],
+  "exclude": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

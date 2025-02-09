@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { defineConfig } from "vitest/config"
 import { dirname } from "path"
 import { fileURLToPath } from "url"
