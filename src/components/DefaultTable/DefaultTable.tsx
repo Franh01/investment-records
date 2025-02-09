@@ -161,10 +161,10 @@ const DefaultTable = ({
                 </TableCell>
                 <TableCell align="center">{transaction.amount}</TableCell>
                 <TableCell align="center">
-                  {transaction.price.toFixed(2)}
+                  {transaction?.price?.toFixed(2)}
                 </TableCell>
                 <TableCell align="center">
-                  {transaction.comission.toFixed(2)}
+                  {transaction?.comission?.toFixed(2)}
                 </TableCell>
                 <TableCell align="center">
                   {(

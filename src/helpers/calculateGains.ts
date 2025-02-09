@@ -12,5 +12,5 @@ export const calculateGains = (
 
   if (gains.isNaN()) return 0
 
-  return Number(gains.toFixed(2))
+  return Number(gains?.toFixed(2))
 }

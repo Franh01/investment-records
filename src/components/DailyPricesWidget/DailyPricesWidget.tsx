@@ -40,7 +40,7 @@ const DailyPricesWidget = ({ data }: IDailyPricesWidgetProps) => {
             data.dailyChange > 0 ? "var(--higher-color)" : "var(--lower-color)",
         }}
       >
-        {data.dailyChangePercent.toFixed(2)}%
+        {data?.dailyChangePercent?.toFixed(2)}%
       </Typography>
     </Box>
   )

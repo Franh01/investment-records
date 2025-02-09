@@ -31,7 +31,7 @@ const Summary = () => {
           Balance
         </Typography>
         <Typography fontSize={"32px"} fontWeight={"500"}>
-          $ {statistics.totalInvestment.toFixed(2)}
+          $ {statistics?.totalInvestment?.toFixed(2)}
         </Typography>
       </Box>
       <Box
@@ -55,7 +55,7 @@ const Summary = () => {
                 : "var(--higher-color)",
           }}
         >
-          $ {statistics.unrealizedGains.toFixed(2)}
+          $ {statistics?.unrealizedGains?.toFixed(2)}
         </Typography>
         <Typography
           sx={{
@@ -65,7 +65,7 @@ const Summary = () => {
                 : "var(--higher-color)",
           }}
         >
-          ({statistics.unrealizedGainsPercentage.toFixed(2)}%)
+          ({statistics?.unrealizedGainsPercentage?.toFixed(2)}%)
         </Typography>
       </Box>
       <Box id="buttons" sx={{ display: "flex", gap: "10px", mt: "10px" }}>
