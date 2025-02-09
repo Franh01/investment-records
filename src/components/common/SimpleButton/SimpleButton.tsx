@@ -1,5 +1,7 @@
 import { Button, CircularProgress } from "@mui/material"
 
+import useViewportSize from "@hooks/useViewportSize"
+
 interface ISimpleButtonProps {
   text: string
   onClick?: () => void
@@ -16,6 +18,7 @@ const SimpleButton = ({
   size = "small",
   width = "auto",
 }: ISimpleButtonProps) => {
+  const { isMobile } = useViewportSize()
   //TODO: Add colors to variables
   return (
     <Button
@@ -27,7 +30,7 @@ const SimpleButton = ({
       sx={{
         height: size === "small" ? "26px" : "auto",
         width: width === "auto" ? "auto" : "100%",
-        minWidth: "120px",
+        minWidth: isMobile ? "auto" : "120px",
         textTransform: "none",
         borderColor: "#114B5F20",
         color: "#114B5F",

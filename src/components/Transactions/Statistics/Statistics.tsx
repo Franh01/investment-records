@@ -1,8 +1,10 @@
 import { Box } from "@mui/material"
 import SimpleBarChart from "./Charts/Bars"
 import Summary from "./Summary/Summary"
+import useViewportSize from "@hooks/useViewportSize"
 
 const Statistics = () => {
+  const { isMobile, isTablet } = useViewportSize()
   return (
     <Box
       sx={{
@@ -11,11 +13,11 @@ const Statistics = () => {
         alignItems: "flex-start",
         border: "2px solid #114B5F10",
         borderRadius: "5px",
-        height: "170px",
+        flexWrap: "wrap",
       }}
     >
       <Summary />
-      <SimpleBarChart width={500} height={170} />
+      {!isTablet && !isMobile && <SimpleBarChart width={500} height={170} />}
     </Box>
   )
 }

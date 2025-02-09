@@ -5,8 +5,10 @@ import type { ITransactionStatistics } from "@interfaces/index"
 import Refresh from "./Buttons/Refresh"
 import { selectTransactionsStatistics } from "@components/Transactions/transactionSlice"
 import { useAppSelector } from "@app/hooks"
+import useViewportSize from "@hooks/useViewportSize"
 
 const Summary = () => {
+  const { isMobile } = useViewportSize()
   const statistics: ITransactionStatistics = useAppSelector(
     selectTransactionsStatistics,
   )
@@ -18,7 +20,7 @@ const Summary = () => {
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-start",
-        padding: "8px 49px",
+        padding: isMobile ? "10px 20px" : "8px 49px",
         height: "100%",
       }}
     >
