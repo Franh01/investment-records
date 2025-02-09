@@ -4,21 +4,29 @@ interface ISimpleButtonProps {
   text: string
   onClick?: () => void
   loading?: boolean
+  type?: "button" | "submit"
+  size?: "small" | "medium" | "large"
+  width?: "auto" | "full"
 }
 const SimpleButton = ({
   text = "Simple Button",
   onClick,
   loading = false,
+  type = "button",
+  size = "small",
+  width = "auto",
 }: ISimpleButtonProps) => {
   //TODO: Add colors to variables
   return (
     <Button
+      type={type}
       disabled={loading}
       variant="outlined"
-      size="small"
+      size={size}
       onClick={onClick}
       sx={{
-        height: "26px",
+        height: size === "small" ? "26px" : "auto",
+        width: width === "auto" ? "auto" : "100%",
         minWidth: "120px",
         textTransform: "none",
         borderColor: "#114B5F20",

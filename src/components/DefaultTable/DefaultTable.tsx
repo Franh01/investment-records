@@ -163,7 +163,9 @@ const DefaultTable = ({
                 <TableCell align="center">
                   {transaction.price.toFixed(2)}
                 </TableCell>
-                <TableCell align="center">{transaction.comission}</TableCell>
+                <TableCell align="center">
+                  {transaction.comission.toFixed(2)}
+                </TableCell>
                 <TableCell align="center">
                   {(
                     transaction.comission +

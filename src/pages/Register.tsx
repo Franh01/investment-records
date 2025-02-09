@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
-import LoginForm from "@components/Login/LoginForm"
+import RegisterForm from "@components/Login/RegisterForm"
 
-const Login = () => {
+const Register = () => {
   return (
     <Box
       sx={{
@@ -13,9 +13,9 @@ const Login = () => {
         background: "#F3E9D230",
       }}
     >
-      <LoginForm />
+      <RegisterForm />
     </Box>
   )
 }
 
-export default Login
+export default Register
