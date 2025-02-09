@@ -9,6 +9,7 @@ interface IDailyPricesWidgetProps {
 }
 
 const DailyPricesWidget = ({ data }: IDailyPricesWidgetProps) => {
+  if (!data) return null
   return (
     <Box
       sx={{

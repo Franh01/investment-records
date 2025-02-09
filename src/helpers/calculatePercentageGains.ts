@@ -14,5 +14,7 @@ export const calculatePercentageGains = (
 
   const gains = sellPrice.minus(buyPrice).dividedBy(sellPrice).times(100)
 
+  if (gains.isNaN()) return 0
+
   return Number(gains.toFixed(2))
 }

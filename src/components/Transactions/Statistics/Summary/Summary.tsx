@@ -13,6 +13,8 @@ const Summary = () => {
     selectTransactionsStatistics,
   )
 
+  if (!statistics) return null
+
   return (
     <Box
       sx={{

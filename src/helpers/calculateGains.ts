@@ -10,5 +10,7 @@ export const calculateGains = (
     .times(transaction.amount)
     .minus(transaction.comission)
 
+  if (gains.isNaN()) return 0
+
   return Number(gains.toFixed(2))
 }
