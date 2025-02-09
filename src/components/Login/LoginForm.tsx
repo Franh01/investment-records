@@ -1,7 +1,7 @@
 import { Box, Divider, Paper, Typography } from "@mui/material"
+import { NavLink, useNavigate } from "react-router-dom"
 
 import IPLogo from "./IPLogo"
-import { NavLink } from "react-router-dom"
 import ReusableForm from "@components/common/ReusableForm/ReusableForm"
 import { useState } from "react"
 
@@ -10,6 +10,8 @@ interface IUserInfo {
   password: string
 }
 const LoginForm = () => {
+  const navigate = useNavigate()
+  const [error, setError] = useState(false)
   const [userInfo, setUserInfo] = useState<IUserInfo>({
     username: "",
     password: "",
@@ -31,6 +33,12 @@ const LoginForm = () => {
   ]
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (userInfo.username === "franh01" && userInfo.password === "1234") {
+      setError(false)
+      navigate("/")
+    } else {
+      setError(true)
+    }
     e.preventDefault()
   }
   return (
@@ -44,6 +52,11 @@ const LoginForm = () => {
         state={userInfo}
         submitText="Ingresar"
       >
+        {error && (
+          <Typography color="error">
+            Usuario o contraseña incorrectos
+          </Typography>
+        )}
         <a
           href="mailto:fran_lopez9@live.com"
           style={{
